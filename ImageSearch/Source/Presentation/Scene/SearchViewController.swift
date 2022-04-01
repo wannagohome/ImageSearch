@@ -51,10 +51,15 @@ final class SearchViewController: UIViewController, View {
 extension SearchViewController {
     func bind(reactor: SearchReactor) {
         bindAction(reactor: reactor)
+        bindState(reactor: reactor)
     }
     
     private func bindAction(reactor: SearchReactor) {
         bindSearchBar(reactor: reactor)
+    }
+    
+    private func bindState(reactor: SearchReactor) {
+        bindCollectionView(reactor: reactor)
     }
     
     private func bindSearchBar(reactor: SearchReactor) {

@@ -19,6 +19,7 @@ final class ImageUseCase: ImageUseCaseType {
     private let repository: ImageRepositoryType
     private var requestInfo: ImageSearchRequest!
     private var isEndOfPages: Bool = false
+    private var isLoading: Bool = false
     
     // MARK: - Initialization
     init(repository: ImageRepositoryType) {
@@ -33,7 +34,7 @@ final class ImageUseCase: ImageUseCaseType {
     }
     
     func loadNextPage() -> Single<[ImageModel]> {
-        guard !isEndOfPages else {
+        guard !isEndOfPages && !isLoading else {
             return .never()
         }
         requestInfo.page += 1
@@ -42,12 +43,14 @@ final class ImageUseCase: ImageUseCaseType {
     }
     
     private func sendRequest() -> Single<[ImageModel]> {
+        self.isLoading = true
         return repository.search(requestInfo)
             .do(onSuccess: { [weak self] in
+                self?.isLoading = false
                 self?.isEndOfPages = $0.meta.isEnd
             })
             .map { res in
                 res.documents.map { ImageModel(document: $0) }
-            }
+            }.debug()
     }
 }

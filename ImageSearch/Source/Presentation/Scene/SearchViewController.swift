@@ -78,7 +78,7 @@ extension SearchViewController {
     private func bindSearchBar(reactor: SearchReactor) {
         searchBar.rx.text.orEmpty
             .filter(\.isNotEmpty)
-            .debounce(.seconds(1), scheduler: MainScheduler()).debug()
+            .debounce(.seconds(1), scheduler: MainScheduler())
             .map(SearchReactor.Action.typeSearchText)
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
@@ -86,6 +86,7 @@ extension SearchViewController {
     
     private func bindScrollBottom(reactor: SearchReactor) {
         collectionView.rx.bottom
+            .throttle(.milliseconds(800), scheduler: MainScheduler())
             .map { SearchReactor.Action.hitsBottom }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)

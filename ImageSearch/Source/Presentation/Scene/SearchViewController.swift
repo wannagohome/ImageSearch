@@ -68,10 +68,11 @@ extension SearchViewController {
     
     private func bindAction(reactor: SearchReactor) {
         bindSearchBar(reactor: reactor)
+        bindScrollBottom(reactor: reactor)
     }
     
     private func bindState(reactor: SearchReactor) {
-        bindCollectionView(reactor: reactor)
+        bindImages(reactor: reactor)
     }
     
     private func bindSearchBar(reactor: SearchReactor) {
@@ -83,7 +84,14 @@ extension SearchViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func bindCollectionView(reactor: SearchReactor) {
+    private func bindScrollBottom(reactor: SearchReactor) {
+        collectionView.rx.bottom
+            .map { SearchReactor.Action.hitsBottom }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func bindImages(reactor: SearchReactor) {
         reactor.state.map(\.images)
             .asDriver(onErrorJustReturn: [])
             .drive(collectionView.rx.items) { cv, row, item in

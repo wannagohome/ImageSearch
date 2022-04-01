@@ -35,6 +35,7 @@
 		CD9120FC27F5DBDB0094EE00 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9120FB27F5DBDB0094EE00 /* NetworkError.swift */; };
 		CD9120FF27F721BC0094EE00 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9120FE27F721BC0094EE00 /* Decoder.swift */; };
 		CD91210127F727470094EE00 /* String + Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91210027F727470094EE00 /* String + Ex.swift */; };
+		CD91210327F7286B0094EE00 /* UICollectionView + Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91210227F7286B0094EE00 /* UICollectionView + Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		CD9120FB27F5DBDB0094EE00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CD9120FE27F721BC0094EE00 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		CD91210027F727470094EE00 /* String + Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ex.swift"; sourceTree = "<group>"; };
+		CD91210227F7286B0094EE00 /* UICollectionView + Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 			children = (
 				C0CBE07727F6E40B0047A3B7 /* Encodable + Ex.swift */,
 				CD91210027F727470094EE00 /* String + Ex.swift */,
+				CD91210227F7286B0094EE00 /* UICollectionView + Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 			files = (
 				CD9120FF27F721BC0094EE00 /* Decoder.swift in Sources */,
 				C0CBE06327F6C6BB0047A3B7 /* ImageDocument.swift in Sources */,
+				CD91210327F7286B0094EE00 /* UICollectionView + Rx.swift in Sources */,
 				C0CBE05D27F6B93A0047A3B7 /* ImageModel.swift in Sources */,
 				CD9120F327F5D54A0094EE00 /* NetworkManager.swift in Sources */,
 				C0CBE06727F6C9310047A3B7 /* ImageSearchResponse.swift in Sources */,

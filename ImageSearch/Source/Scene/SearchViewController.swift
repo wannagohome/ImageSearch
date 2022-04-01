@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import ReactorKit
 
-final class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController, View {
+    
+    // MARK: - Properties
+    var disposeBag: DisposeBag = DisposeBag()
     
     // MARK: Views
     private let searchBar = UISearchBar()
@@ -27,6 +31,13 @@ final class SearchViewController: UIViewController {
         searchBar.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+}
+
+// MARK: - Bind
+extension SearchViewController {
+    func bind(reactor: SearchReactor) {
+        // TODO: bind
     }
 }
 

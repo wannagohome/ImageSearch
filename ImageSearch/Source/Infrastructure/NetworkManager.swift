@@ -18,12 +18,18 @@ final class NetworkManager {
     func request(_ request: URLRequest) -> Single<Data> {
         return Single.create { [weak self] single in
             let dataTask = self?.session.dataTask(with: request) { data, response, error in
-                guard error == nil else {
-                    if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                        single(.failure(NetworkError.http(statusCode: statusCode)))
-                    }
+                if let error = error {
+                    single(.failure(error))
                     return
                 }
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                    return
+                }
+                if statusCode >= 300 || statusCode < 200 {
+                    single(.failure(NetworkError.http(statusCode: statusCode)))
+                    return
+                }
+                
                 
                 guard let data = data else {
                     single(.failure(NetworkError.noData))

@@ -24,17 +24,14 @@ final class ImageRepository: ImageRepositoryType {
     
     // MARK: - Internal Methods
     func search(_ parameter: ImageSearchRequest) -> Single<ImageSearchResponse> {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
+        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/image")!
         components.queryItems = parameter.toQueryItem()
         var request = URLRequest(url: components.url!)
         request.allHTTPHeaderFields = ["Authorization" : "KakaoAK \(Environment.apiKey)"]
         
         return networkManager.request(request)
             .flatMap { data -> Single<ImageSearchResponse> in
-                return .just(try decoder.decode(ImageSearchResponse.self, from: data))
+                return .just(try Decoder().decode(ImageSearchResponse.self, from: data))
             }
     }
 }

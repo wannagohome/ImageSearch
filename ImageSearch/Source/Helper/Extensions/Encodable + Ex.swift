@@ -2,7 +2,7 @@
 //  Encodable + Ex.swift
 //  ImageSearch
 //
-//  Created by CW on 2022/04/01.
+//  Created by Jinho Jang on 2022/04/01.
 //
 
 import Foundation

@@ -18,8 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let network = NetworkManager()
+        let repository = ImageRepository(networkManager: network)
+        let usecase = ImageUseCase(repository: repository)
+        let reactor = SearchReactor(usecase: usecase)
+        let vc = SearchViewController()
+        vc.reactor = reactor
+        
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = SearchViewController()
+        window?.rootViewController = vc
         window?.makeKeyAndVisible()
     }
 

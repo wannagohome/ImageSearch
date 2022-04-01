@@ -51,6 +51,6 @@ final class ImageUseCase: ImageUseCaseType {
             })
             .map { res in
                 res.documents.map { ImageModel(document: $0) }
-            }.debug()
+            }
     }
 }

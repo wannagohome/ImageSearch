@@ -12,10 +12,13 @@ final class SearchReactor: Reactor {
     // MARK: - Properties
     var initialState: State
     private let usercase: ImageUseCaseType
+    weak var presenter: SearchViewPresenter?
     
-    init(usecase: ImageUseCaseType) {
+    init(usecase: ImageUseCaseType,
+         presenter: SearchViewPresenter) {
         self.initialState = State()
         self.usercase = usecase
+        self.presenter = presenter
     }
     
     // MARK: - Reactor
@@ -52,8 +55,12 @@ final class SearchReactor: Reactor {
                 .asObservable()
                 .map(Mutation.appendImages)
             
-        case .selectImageAt:
-            // TODO: make function
+        case .selectImageAt(let indexPath):
+            if indexPath.row < currentState.images.count {
+                let imageModel = currentState.images[indexPath.row]
+                self.presenter?.presentDetail(model: imageModel)
+            }
+            
             return .empty()
         }
     }

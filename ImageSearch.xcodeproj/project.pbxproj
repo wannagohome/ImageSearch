@@ -36,6 +36,8 @@
 		CD9120FF27F721BC0094EE00 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9120FE27F721BC0094EE00 /* Decoder.swift */; };
 		CD91210127F727470094EE00 /* String + Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91210027F727470094EE00 /* String + Ex.swift */; };
 		CD91210327F7286B0094EE00 /* UICollectionView + Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91210227F7286B0094EE00 /* UICollectionView + Rx.swift */; };
+		CD91210727F72FCA0094EE00 /* SearchViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91210627F72FCA0094EE00 /* SearchViewPresenter.swift */; };
+		CD91210A27F7305F0094EE00 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD91210927F7305F0094EE00 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,8 @@
 		CD9120FE27F721BC0094EE00 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
 		CD91210027F727470094EE00 /* String + Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ex.swift"; sourceTree = "<group>"; };
 		CD91210227F7286B0094EE00 /* UICollectionView + Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Rx.swift"; sourceTree = "<group>"; };
+		CD91210627F72FCA0094EE00 /* SearchViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewPresenter.swift; sourceTree = "<group>"; };
+		CD91210927F7305F0094EE00 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +201,8 @@
 		C00172A627F579B200DBEA47 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				C001727027F568DC00DBEA47 /* SearchViewController.swift */,
-				C0CBE05827F6B5720047A3B7 /* SearchReactor.swift */,
+				CD91210427F72F870094EE00 /* Search */,
+				CD91210527F72F910094EE00 /* Detail */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -316,6 +320,24 @@
 				CD9120FE27F721BC0094EE00 /* Decoder.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		CD91210427F72F870094EE00 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C001727027F568DC00DBEA47 /* SearchViewController.swift */,
+				C0CBE05827F6B5720047A3B7 /* SearchReactor.swift */,
+				CD91210627F72FCA0094EE00 /* SearchViewPresenter.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		CD91210527F72F910094EE00 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CD91210927F7305F0094EE00 /* DetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,6 +493,8 @@
 				CD91210327F7286B0094EE00 /* UICollectionView + Rx.swift in Sources */,
 				C0CBE05D27F6B93A0047A3B7 /* ImageModel.swift in Sources */,
 				CD9120F327F5D54A0094EE00 /* NetworkManager.swift in Sources */,
+				CD91210727F72FCA0094EE00 /* SearchViewPresenter.swift in Sources */,
+				CD91210A27F7305F0094EE00 /* DetailViewController.swift in Sources */,
 				C0CBE06727F6C9310047A3B7 /* ImageSearchResponse.swift in Sources */,
 				C001727127F568DC00DBEA47 /* SearchViewController.swift in Sources */,
 				C001726D27F568DC00DBEA47 /* AppDelegate.swift in Sources */,

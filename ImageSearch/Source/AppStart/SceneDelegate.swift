@@ -21,12 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let network = NetworkManager()
         let repository = ImageRepository(networkManager: network)
         let usecase = ImageUseCase(repository: repository)
-        let reactor = SearchReactor(usecase: usecase)
         let vc = SearchViewController()
+        let reactor = SearchReactor(usecase: usecase, presenter: vc)
         vc.reactor = reactor
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = vc
+        window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
     }
 

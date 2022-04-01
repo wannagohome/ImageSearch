@@ -69,6 +69,7 @@ extension SearchViewController {
     private func bindAction(reactor: SearchReactor) {
         bindSearchBar(reactor: reactor)
         bindScrollBottom(reactor: reactor)
+        bindSelectImage(reactor: reactor)
     }
     
     private func bindState(reactor: SearchReactor) {
@@ -78,6 +79,7 @@ extension SearchViewController {
     private func bindSearchBar(reactor: SearchReactor) {
         searchBar.rx.text.orEmpty
             .filter(\.isNotEmpty)
+            .distinctUntilChanged()
             .debounce(.seconds(1), scheduler: MainScheduler())
             .map(SearchReactor.Action.typeSearchText)
             .bind(to: reactor.action)
@@ -88,6 +90,13 @@ extension SearchViewController {
         collectionView.rx.bottom
             .throttle(.milliseconds(800), scheduler: MainScheduler())
             .map { SearchReactor.Action.hitsBottom }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func bindSelectImage(reactor: SearchReactor) {
+        collectionView.rx.itemSelected
+            .map(SearchReactor.Action.selectImageAt)
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
     }

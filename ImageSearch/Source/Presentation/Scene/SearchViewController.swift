@@ -76,7 +76,7 @@ extension SearchViewController {
     
     private func bindSearchBar(reactor: SearchReactor) {
         searchBar.rx.text.orEmpty
-            .throttle(.seconds(1), scheduler: MainScheduler()).debug()
+            .debounce(.seconds(1), scheduler: MainScheduler()).debug()
             .map(SearchReactor.Action.typeSearchText)
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)

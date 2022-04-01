@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol ImageRepositoryType {
-    func search(_ request: URLRequest) -> Single<ImageSearch>
+    func search(_ request: URLRequest) -> Single<ImageSearchResponse>
 }
 
 final class ImageRepository: ImageRepositoryType {
@@ -23,13 +23,13 @@ final class ImageRepository: ImageRepositoryType {
     }
     
     // MARK: - Internal Methods
-    func search(_ request: URLRequest) -> Single<ImageSearch> {
+    func search(_ request: URLRequest) -> Single<ImageSearchResponse> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         
         return networkManager.request(request)
-            .flatMap { data -> Single<ImageSearch> in
-                return .just(try decoder.decode(ImageSearch.self, from: data))
+            .flatMap { data -> Single<ImageSearchResponse> in
+                return .just(try decoder.decode(ImageSearchResponse.self, from: data))
             }
     }
 }

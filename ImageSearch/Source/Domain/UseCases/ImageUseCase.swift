@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol ImageUseCaseType {
-    func search(query: String, page: Int, size: Int) -> Single<ImageSearch>
+    func search(query: String, page: Int, size: Int) -> Single<ImageSearchResponse>
 }
 
 final class ImageUseCase: ImageUseCaseType {
@@ -23,7 +23,7 @@ final class ImageUseCase: ImageUseCaseType {
     }
     
     // MARK: - Internal Methods
-    func search(query: String, page: Int, size: Int) -> Single<ImageSearch> {
+    func search(query: String, page: Int, size: Int) -> Single<ImageSearchResponse> {
         var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
         components.queryItems = [
             URLQueryItem(name: "query", value: query),

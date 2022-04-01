@@ -8,7 +8,7 @@
 struct SearchMetaData: Codable {
     let totalCount: Int
     let pageableCount: Int
-    let isEnd: Int
+    let isEnd: Bool
     
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"

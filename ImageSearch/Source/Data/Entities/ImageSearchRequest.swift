@@ -7,6 +7,6 @@
 
 struct ImageSearchRequest: Codable {
     var query: String
-    var page: Int
+    var page: Int = 1
     var size: Int = 30
 }

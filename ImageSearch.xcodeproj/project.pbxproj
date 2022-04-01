@@ -25,6 +25,7 @@
 		C0CBE06D27F6D5890047A3B7 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE06C27F6D5890047A3B7 /* ImageUseCase.swift */; };
 		C0CBE07327F6DD5E0047A3B7 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE07227F6DD5E0047A3B7 /* Environment.swift */; };
 		C0CBE07527F6E1490047A3B7 /* ImageSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE07427F6E1490047A3B7 /* ImageSearchRequest.swift */; };
+		C0CBE07827F6E40B0047A3B7 /* Encodable + Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE07727F6E40B0047A3B7 /* Encodable + Ex.swift */; };
 		CD9120F327F5D54A0094EE00 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9120F227F5D54A0094EE00 /* NetworkManager.swift */; };
 		CD9120F627F5D5F40094EE00 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CD9120F527F5D5F40094EE00 /* RxCocoa */; };
 		CD9120F827F5D5F40094EE00 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CD9120F727F5D5F40094EE00 /* RxSwift */; };
@@ -70,6 +71,7 @@
 		C0CBE06F27F6DA440047A3B7 /* Keys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Keys.xcconfig; sourceTree = "<group>"; };
 		C0CBE07227F6DD5E0047A3B7 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		C0CBE07427F6E1490047A3B7 /* ImageSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRequest.swift; sourceTree = "<group>"; };
+		C0CBE07727F6E40B0047A3B7 /* Encodable + Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Ex.swift"; sourceTree = "<group>"; };
 		CD9120F227F5D54A0094EE00 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CD9120FB27F5DBDB0094EE00 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +157,7 @@
 		C00172A327F5794500DBEA47 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C0CBE07627F6E3FA0047A3B7 /* Extensions */,
 				C0CBE07127F6DD460047A3B7 /* Environment */,
 				C00172A527F5797200DBEA47 /* AppStart */,
 				C0CBE05A27F6B9020047A3B7 /* Domain */,
@@ -258,6 +261,14 @@
 				C0CBE07227F6DD5E0047A3B7 /* Environment.swift */,
 			);
 			path = Environment;
+			sourceTree = "<group>";
+		};
+		C0CBE07627F6E3FA0047A3B7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C0CBE07727F6E40B0047A3B7 /* Encodable + Ex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CD9120F127F5D5190094EE00 /* Infrastructure */ = {
@@ -421,6 +432,7 @@
 				C0CBE06727F6C9310047A3B7 /* ImageSearchResponse.swift in Sources */,
 				C001727127F568DC00DBEA47 /* SearchViewController.swift in Sources */,
 				C001726D27F568DC00DBEA47 /* AppDelegate.swift in Sources */,
+				C0CBE07827F6E40B0047A3B7 /* Encodable + Ex.swift in Sources */,
 				C001726F27F568DC00DBEA47 /* SceneDelegate.swift in Sources */,
 				C0CBE06A27F6CEA40047A3B7 /* ImageRepository.swift in Sources */,
 				C0CBE07327F6DD5E0047A3B7 /* Environment.swift in Sources */,

@@ -9,13 +9,14 @@ import Foundation
 import RxSwift
 
 protocol ImageUseCaseType {
-    func search(query: String, page: Int, size: Int) -> Single<ImageSearchResponse>
+    func search(query: String) -> Single<ImageSearchResponse>
 }
 
 final class ImageUseCase: ImageUseCaseType {
     
     // MARK: - Properties
     private let repository: ImageRepositoryType
+    private var requestInfo: ImageSearchRequest?
     
     // MARK: - Initialization
     init(repository: ImageRepositoryType) {
@@ -23,14 +24,11 @@ final class ImageUseCase: ImageUseCaseType {
     }
     
     // MARK: - Internal Methods
-    func search(query: String, page: Int, size: Int) -> Single<ImageSearchResponse> {
-        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
-        components.queryItems = [
-            URLQueryItem(name: "query", value: query),
-            URLQueryItem(name: "page", value: "\(page)"),
-            URLQueryItem(name: "size", value: "\(size)")
-        ]
+    func search(query: String) -> Single<ImageSearchResponse> {
+        requestInfo = ImageSearchRequest(query: query)
         
+        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
+        components.queryItems = requestInfo.toQueryItem()
         var request = URLRequest(url: components.url!)
         request.allHTTPHeaderFields = ["Authorization" : "KakaoAK \(Environment.apiKey)"]
 

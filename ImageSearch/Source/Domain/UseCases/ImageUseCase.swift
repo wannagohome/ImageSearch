@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 
 protocol ImageUseCaseType {
-    func search(query: String) -> Single<ImageSearchResponse>
-    func loadNextPage() -> Single<ImageSearchResponse>
+    func search(query: String) -> Single<[ImageModel]>
+    func loadNextPage() -> Single<[ImageModel]>
 }
 
 final class ImageUseCase: ImageUseCaseType {
@@ -26,24 +26,28 @@ final class ImageUseCase: ImageUseCaseType {
     }
     
     // MARK: - Internal Methods
-    func search(query: String) -> Single<ImageSearchResponse> {
+    func search(query: String) -> Single<[ImageModel]> {
         requestInfo = ImageSearchRequest(query: query)
 
-        return repository.search(requestInfo)
-            .do(onSuccess: { [weak self] in
-                self?.isEndOfPages = $0.meta.isEnd
-            })
+        return sendRequest()
     }
     
-    func loadNextPage() -> Single<ImageSearchResponse> {
+    func loadNextPage() -> Single<[ImageModel]> {
         guard !isEndOfPages else {
             return .never()
         }
         requestInfo.page += 1
         
+        return sendRequest()
+    }
+    
+    private func sendRequest() -> Single<[ImageModel]> {
         return repository.search(requestInfo)
             .do(onSuccess: { [weak self] in
                 self?.isEndOfPages = $0.meta.isEnd
             })
+            .map { res in
+                res.documents.map { ImageModel(document: $0) }
+            }
     }
 }

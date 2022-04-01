@@ -21,15 +21,14 @@ final class SearchViewController: UIViewController, View {
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
-    ).then { collectionView in
-        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.description())
-    }
+    )
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         layout()
+        attribute()
     }
     
     // MARK: - Private Methods
@@ -43,6 +42,19 @@ final class SearchViewController: UIViewController, View {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func attribute() {
+        collectionView.do {
+            $0.rx.setDelegate(self)
+                .disposed(by: self.disposeBag)
+            $0.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.description())
+            
+            if let layout = $0.collectionViewLayout as? UICollectionViewFlowLayout {
+                layout.minimumLineSpacing = 0
+                layout.minimumInteritemSpacing = 0
+            }
         }
     }
 }
@@ -85,3 +97,14 @@ extension SearchViewController {
     }
 }
 
+// MARK: - Collection View Delegate
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        let width = collectionView.bounds.width / 3
+        return CGSize(width: width, height: width)
+    }
+}

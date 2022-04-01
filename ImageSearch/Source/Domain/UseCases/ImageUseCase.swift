@@ -17,7 +17,7 @@ final class ImageUseCase: ImageUseCaseType {
     
     // MARK: - Properties
     private let repository: ImageRepositoryType
-    private var requestInfo: ImageSearchRequest?
+    private var requestInfo: ImageSearchRequest!
     private var isEndOfPages: Bool = false
     
     // MARK: - Initialization
@@ -28,13 +28,8 @@ final class ImageUseCase: ImageUseCaseType {
     // MARK: - Internal Methods
     func search(query: String) -> Single<ImageSearchResponse> {
         requestInfo = ImageSearchRequest(query: query)
-        
-        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
-        components.queryItems = requestInfo.toQueryItem()
-        var request = URLRequest(url: components.url!)
-        request.allHTTPHeaderFields = ["Authorization" : "KakaoAK \(Environment.apiKey)"]
 
-        return repository.search(request)
+        return repository.search(requestInfo)
             .do(onSuccess: { [weak self] in
                 self?.isEndOfPages = $0.meta.isEnd
             })
@@ -44,14 +39,9 @@ final class ImageUseCase: ImageUseCaseType {
         guard !isEndOfPages else {
             return .never()
         }
+        requestInfo.page += 1
         
-        requestInfo?.page += 1
-        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
-        components.queryItems = requestInfo.toQueryItem()
-        var request = URLRequest(url: components.url!)
-        request.allHTTPHeaderFields = ["Authorization" : "KakaoAK \(Environment.apiKey)"]
-        
-        return repository.search(request)
+        return repository.search(requestInfo)
             .do(onSuccess: { [weak self] in
                 self?.isEndOfPages = $0.meta.isEnd
             })

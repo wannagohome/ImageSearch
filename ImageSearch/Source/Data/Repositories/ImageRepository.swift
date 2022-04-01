@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol ImageRepositoryType {
-    func search(_ request: URLRequest) -> Single<ImageSearchResponse>
+    func search(_ parameter: ImageSearchRequest) -> Single<ImageSearchResponse>
 }
 
 final class ImageRepository: ImageRepositoryType {
@@ -23,9 +23,14 @@ final class ImageRepository: ImageRepositoryType {
     }
     
     // MARK: - Internal Methods
-    func search(_ request: URLRequest) -> Single<ImageSearchResponse> {
+    func search(_ parameter: ImageSearchRequest) -> Single<ImageSearchResponse> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
+        
+        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/vclip")!
+        components.queryItems = parameter.toQueryItem()
+        var request = URLRequest(url: components.url!)
+        request.allHTTPHeaderFields = ["Authorization" : "KakaoAK \(Environment.apiKey)"]
         
         return networkManager.request(request)
             .flatMap { data -> Single<ImageSearchResponse> in

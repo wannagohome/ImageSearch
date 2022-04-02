@@ -8,7 +8,11 @@
 import Foundation
 import RxSwift
 
-final class NetworkManager {
+protocol NetworkManagerType {
+    func request(_ request: URLRequest) -> Single<Data>
+}
+
+final class NetworkManager: NetworkManagerType {
     private let session: URLSession
     
     init(session: URLSession = .shared) {

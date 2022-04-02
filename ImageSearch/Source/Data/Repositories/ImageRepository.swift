@@ -15,14 +15,15 @@ protocol ImageRepositoryType {
 final class ImageRepository: ImageRepositoryType {
     
     // MARK: - Properties
-    private let networkManager: NetworkManager
+    private let networkManager: NetworkManagerType
     
     // MARK: - Initialization
-    init(networkManager: NetworkManager) {
+    init(networkManager: NetworkManagerType) {
         self.networkManager = networkManager
     }
     
     // MARK: - Internal Methods
+    @discardableResult
     func search(_ parameter: ImageSearchRequest) -> Single<ImageSearchResponse> {
         var components = URLComponents(string: "https://dapi.kakao.com/v2/search/image")!
         components.queryItems = parameter.toQueryItem()

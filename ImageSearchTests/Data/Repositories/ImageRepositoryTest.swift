@@ -19,14 +19,9 @@ class ImageRepositoryTest: XCTestCase {
         repository = ImageRepository(networkManager: networkManager)
     }
     
-    override func tearDown() {
-        super.tearDown()
-        repository = nil
-    }
-    
     func testSearch_endPointURL() {
         //when
-        repository.search(ImageSearchRequest(query: "q"))
+        let _ = repository.search(ImageSearchRequest(query: "q"))
         
         //then
         if let url = networkManager.request?.url {
@@ -43,7 +38,7 @@ class ImageRepositoryTest: XCTestCase {
         let searchQuery = ImageSearchRequest(query: "q")
         
         //when
-        repository.search(searchQuery)
+        let _ = repository.search(searchQuery)
         
         //then
         if let url = networkManager.request?.url,

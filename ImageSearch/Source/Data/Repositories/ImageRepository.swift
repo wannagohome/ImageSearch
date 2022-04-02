@@ -23,7 +23,6 @@ final class ImageRepository: ImageRepositoryType {
     }
     
     // MARK: - Internal Methods
-    @discardableResult
     func search(_ parameter: ImageSearchRequest) -> Single<ImageSearchResponse> {
         var components = URLComponents(string: "https://dapi.kakao.com/v2/search/image")!
         components.queryItems = parameter.toQueryItem()

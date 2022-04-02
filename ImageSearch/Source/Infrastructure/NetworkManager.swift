@@ -23,7 +23,7 @@ final class NetworkManager {
                     return
                 }
                 guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                    return
+                    fatalError("This request is not http. Check your scheme of URL.")
                 }
                 if statusCode >= 300 || statusCode < 200 {
                     single(.failure(NetworkError.http(statusCode: statusCode)))
@@ -43,6 +43,6 @@ final class NetworkManager {
             return Disposables.create {
                 dataTask?.cancel()
             }
-        }
+        }.retry(3)
     }
 }

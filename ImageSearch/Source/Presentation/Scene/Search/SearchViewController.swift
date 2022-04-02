@@ -74,13 +74,14 @@ extension SearchViewController {
     
     private func bindState(reactor: SearchReactor) {
         bindImages(reactor: reactor)
+        bindErrorMesage(reactor: reactor)
     }
     
     private func bindSearchBar(reactor: SearchReactor) {
         searchBar.rx.text.orEmpty
             .filter(\.isNotEmpty)
             .distinctUntilChanged()
-            .debounce(.seconds(1), scheduler: MainScheduler())
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .map(SearchReactor.Action.typeSearchText)
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
@@ -88,7 +89,7 @@ extension SearchViewController {
     
     private func bindScrollBottom(reactor: SearchReactor) {
         collectionView.rx.bottom
-            .throttle(.milliseconds(800), scheduler: MainScheduler())
+            .throttle(.milliseconds(800), scheduler: MainScheduler.instance)
             .map { SearchReactor.Action.hitsBottom }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
@@ -112,6 +113,14 @@ extension SearchViewController {
                 cell.setImageWith(url: item.thumbnailURL)
                 return cell
             }
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func bindErrorMesage(reactor: SearchReactor) {
+        reactor.pulse(\.$alertMessage)
+            .compactMap { $0 }
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: showAlert(message:))
             .disposed(by: self.disposeBag)
     }
 }

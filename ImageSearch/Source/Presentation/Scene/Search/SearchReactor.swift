@@ -31,29 +31,27 @@ final class SearchReactor: Reactor {
     enum Mutation {
         case setImages([ImageModel])
         case appendImages([ImageModel])
+        case setErrorMetssage(String)
     }
     
     struct State {
         var images: [ImageModel] = []
+        @Pulse var alertMessage: String?
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .typeSearchText(let str) :
             return usercase.search(query: str)
-                .do(onError: { err in
-                    // TODO: handle error
-                })
                 .asObservable()
                 .map(Mutation.setImages)
+                .catch { .just(.setErrorMetssage($0.localizedDescription)) }
             
         case .hitsBottom:
             return usercase.loadNextPage()
-                .do(onError: { err in
-                    // TODO: handle error
-                })
                 .asObservable()
                 .map(Mutation.appendImages)
+                .catch { .just(.setErrorMetssage($0.localizedDescription)) }
             
         case .selectImageAt(let indexPath):
             if indexPath.row < currentState.images.count {
@@ -74,6 +72,9 @@ final class SearchReactor: Reactor {
             
         case .appendImages(let models):
             newState.images.append(contentsOf: models)
+            
+        case .setErrorMetssage(let msg):
+            newState.alertMessage = msg
         }
         
         return newState

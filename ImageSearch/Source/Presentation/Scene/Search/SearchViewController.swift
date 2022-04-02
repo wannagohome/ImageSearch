@@ -31,6 +31,12 @@ final class SearchViewController: UIViewController, View {
         attribute()
     }
     
+    // MARK: - Bind
+    func bind(reactor: SearchReactor) {
+        bindAction(reactor: reactor)
+        bindState(reactor: reactor)
+    }
+    
     // MARK: - Private Methods
     private func layout() {
         view.addSubview(searchBar)
@@ -59,25 +65,16 @@ final class SearchViewController: UIViewController, View {
     }
 }
 
-// MARK: - Bind
-extension SearchViewController {
-    func bind(reactor: SearchReactor) {
-        bindAction(reactor: reactor)
-        bindState(reactor: reactor)
-    }
+// MARK: - Bind Actions
+private extension SearchViewController {
     
-    private func bindAction(reactor: SearchReactor) {
+    func bindAction(reactor: SearchReactor) {
         bindSearchBar(reactor: reactor)
         bindScrollBottom(reactor: reactor)
         bindSelectImage(reactor: reactor)
     }
     
-    private func bindState(reactor: SearchReactor) {
-        bindImages(reactor: reactor)
-        bindErrorMesage(reactor: reactor)
-    }
-    
-    private func bindSearchBar(reactor: SearchReactor) {
+    func bindSearchBar(reactor: SearchReactor) {
         searchBar.rx.text.orEmpty
             .filter(\.isNotEmpty)
             .distinctUntilChanged()
@@ -87,7 +84,7 @@ extension SearchViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func bindScrollBottom(reactor: SearchReactor) {
+    func bindScrollBottom(reactor: SearchReactor) {
         collectionView.rx.bottom
             .throttle(.milliseconds(800), scheduler: MainScheduler.instance)
             .map { SearchReactor.Action.hitsBottom }
@@ -95,14 +92,23 @@ extension SearchViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func bindSelectImage(reactor: SearchReactor) {
+    func bindSelectImage(reactor: SearchReactor) {
         collectionView.rx.itemSelected
             .map(SearchReactor.Action.selectImageAt)
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
     }
+}
+
+// MARK: - Bind States
+private extension SearchViewController {
     
-    private func bindImages(reactor: SearchReactor) {
+    func bindState(reactor: SearchReactor) {
+        bindImages(reactor: reactor)
+        bindErrorMesage(reactor: reactor)
+    }
+    
+    func bindImages(reactor: SearchReactor) {
         reactor.state.map(\.images)
             .asDriver(onErrorJustReturn: [])
             .drive(collectionView.rx.items) { cv, row, item in
@@ -116,7 +122,7 @@ extension SearchViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func bindErrorMesage(reactor: SearchReactor) {
+    func bindErrorMesage(reactor: SearchReactor) {
         reactor.pulse(\.$alertMessage)
             .compactMap { $0 }
             .asDriver(onErrorDriveWith: .never())

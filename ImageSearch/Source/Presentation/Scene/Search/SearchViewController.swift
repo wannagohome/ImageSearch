@@ -18,6 +18,7 @@ final class SearchViewController: UIViewController, View {
     
     // MARK: Views
     private let searchBar = UISearchBar()
+    private let emptyResultLabel = UILabel()
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
@@ -41,6 +42,7 @@ final class SearchViewController: UIViewController, View {
     private func layout() {
         view.addSubview(searchBar)
         view.addSubview(collectionView)
+        view.addSubview(emptyResultLabel)
         
         searchBar.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -48,6 +50,9 @@ final class SearchViewController: UIViewController, View {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        emptyResultLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     
@@ -62,12 +67,16 @@ final class SearchViewController: UIViewController, View {
                 layout.minimumInteritemSpacing = 0
             }
         }
+        
+        emptyResultLabel.do {
+            $0.text = "검색 결과가 없습니다."
+            $0.isHidden = true
+        }
     }
 }
 
 // MARK: - Bind Actions
 private extension SearchViewController {
-    
     func bindAction(reactor: SearchReactor) {
         bindSearchBar(reactor: reactor)
         bindScrollBottom(reactor: reactor)
@@ -102,10 +111,10 @@ private extension SearchViewController {
 
 // MARK: - Bind States
 private extension SearchViewController {
-    
     func bindState(reactor: SearchReactor) {
         bindImages(reactor: reactor)
         bindErrorMesage(reactor: reactor)
+        bindIsEmpty(reactor: reactor)
     }
     
     func bindImages(reactor: SearchReactor) {
@@ -127,6 +136,14 @@ private extension SearchViewController {
             .compactMap { $0 }
             .asDriver(onErrorDriveWith: .never())
             .drive(onNext: showAlert(message:))
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindIsEmpty(reactor: SearchReactor) {
+        reactor.state.map(\.isEmpty)
+            .map { !$0 }
+            .asDriver(onErrorJustReturn: false)
+            .drive(emptyResultLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
     }
 }

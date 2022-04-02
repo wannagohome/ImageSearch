@@ -36,6 +36,7 @@ final class SearchReactor: Reactor {
     
     struct State {
         var images: [ImageModel] = []
+        var isEmpty = false
         @Pulse var alertMessage: String?
     }
     
@@ -68,6 +69,7 @@ final class SearchReactor: Reactor {
         
         switch mutation {
         case .setImages(let models):
+            newState.isEmpty = models.isEmpty
             newState.images = models
             
         case .appendImages(let models):

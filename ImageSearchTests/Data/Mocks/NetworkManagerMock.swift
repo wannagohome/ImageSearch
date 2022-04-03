@@ -11,9 +11,10 @@ import RxSwift
 
 class NetworkManagerMock: NetworkManagerType {
     var request: URLRequest?
+    var sampleDataString: String = ""
     
     func request(_ request: URLRequest) -> Single<Data> {
         self.request = request
-        return .never()
+        return .just(sampleDataString.data(using: .utf8)!)
     }
 }

@@ -17,6 +17,6 @@ class ImageRepositoryMock: ImageRepositoryType {
         
         let data = sampleDataString.data(using: .utf8)!
         let sampleResponse = try! Decoder().decode(ImageSearchResponse.self, from: data)
-        return .just(sampleResponse).debug()
+        return .just(sampleResponse)
     }
 }

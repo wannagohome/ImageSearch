@@ -7,16 +7,20 @@
 
 import Foundation
 import XCTest
+import RxTest
+import RxBlocking
 @testable import ImageSearch
 
 class ImageRepositoryTest: XCTestCase {
     private var repository: ImageRepository!
     private var networkManager: NetworkManagerMock!
+    var scheduler: TestScheduler!
     
     override func setUp() {
         super.setUp()
         networkManager = NetworkManagerMock()
         repository = ImageRepository(networkManager: networkManager)
+        scheduler = TestScheduler(initialClock: 0)
     }
     
     func testSearch_endPointURL() {
@@ -50,6 +54,39 @@ class ImageRepositoryTest: XCTestCase {
             XCTAssertEqual(queryItems.first { $0.name == "query" }?.value, searchQuery.query)
         } else {
             XCTFail("wrong url")
+        }
+    }
+    
+    func testSearch_returnsImageSearchResponse() {
+        //given
+        let response = scheduler.createObserver(ImageSearchResponse.self)
+        networkManager.sampleDataString = SampleData.jsonStringHasNextPage
+        
+        //when
+        repository.search(ImageSearchRequest(query: "abcd"))
+            .asObservable()
+            .bind(to: response)
+            .dispose()
+        
+        //then
+        XCTAssertNotNil(response.events.first?.value.element)
+    }
+    
+    func testSearch_returnsError() {
+        //given
+        networkManager.sampleDataString = SampleData.jsonStringTypeMismatch
+        
+        //when
+        let result = repository.search(ImageSearchRequest(query: "abcd"))
+            .toBlocking()
+            .materialize()
+        
+        //then
+        switch result {
+        case .completed:
+            XCTFail()
+        case .failed(_, let error):
+            XCTAssertTrue(error is DecodingError)
         }
     }
 }

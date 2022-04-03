@@ -42,13 +42,16 @@ final class SearchReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .typeSearchText(let str) :
+        case .typeSearchText(let str):
             return usercase.search(query: str)
                 .asObservable()
                 .map(Mutation.setImages)
                 .catch { .just(.setErrorMetssage($0.localizedDescription)) }
             
         case .hitsBottom:
+            guard !currentState.images.isEmpty else {
+                return .empty()
+            }
             return usercase.loadNextPage()
                 .asObservable()
                 .map(Mutation.appendImages)

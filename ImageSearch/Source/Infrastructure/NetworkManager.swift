@@ -8,14 +8,23 @@
 import Foundation
 import RxSwift
 
+protocol URLSessionType {
+    func dataTask(
+        with request: URLRequest,
+        completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void
+    ) -> URLSessionDataTask
+}
+
+extension URLSession: URLSessionType {}
+
 protocol NetworkManagerType {
     func request(_ request: URLRequest) -> Single<Data>
 }
 
 final class NetworkManager: NetworkManagerType {
-    private let session: URLSession
+    private let session: URLSessionType
     
-    init(session: URLSession = .shared) {
+    init(session: URLSessionType = URLSession.shared) {
         self.session = session
     }
     

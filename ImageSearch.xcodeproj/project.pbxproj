@@ -14,6 +14,8 @@
 		C001727927F568DE00DBEA47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C001727727F568DE00DBEA47 /* LaunchScreen.storyboard */; };
 		C001729E27F56A9600DBEA47 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = C001729D27F56A9600DBEA47 /* ReactorKit */; };
 		C00172A127F56D7700DBEA47 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C00172A027F56D7700DBEA47 /* Kingfisher */; };
+		C0C148C927FA911A0047E997 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C148C827FA911A0047E997 /* URLSessionMock.swift */; };
+		C0C148CB27FA968A0047E997 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C148CA27FA968A0047E997 /* NetworkManagerTests.swift */; };
 		C0CBE05727F6B2290047A3B7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0CBE05627F6B2290047A3B7 /* SnapKit */; };
 		C0CBE05927F6B5720047A3B7 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE05827F6B5720047A3B7 /* SearchReactor.swift */; };
 		C0CBE05D27F6B93A0047A3B7 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE05C27F6B93A0047A3B7 /* ImageModel.swift */; };
@@ -67,6 +69,8 @@
 		C001727827F568DE00DBEA47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C001727A27F568DE00DBEA47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C001727F27F568DF00DBEA47 /* ImageSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0C148C827FA911A0047E997 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		C0C148CA27FA968A0047E997 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		C0CBE05827F6B5720047A3B7 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		C0CBE05C27F6B93A0047A3B7 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		C0CBE06227F6C6BB0047A3B7 /* ImageDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDocument.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				CD91211B27F929950094EE00 /* Presentation */,
 				CD91211227F876BA0094EE00 /* Domain */,
 				CD91210B27F86C650094EE00 /* Data */,
+				C0C148C627FA90E90047E997 /* Infrastructure */,
 				CD91211927F87B0C0094EE00 /* SampleData.swift */,
 			);
 			path = ImageSearchTests;
@@ -209,6 +214,23 @@
 				CD91210527F72F910094EE00 /* Detail */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		C0C148C627FA90E90047E997 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				C0C148C727FA90F90047E997 /* Mocks */,
+				C0C148CA27FA968A0047E997 /* NetworkManagerTests.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		C0C148C727FA90F90047E997 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				C0C148C827FA911A0047E997 /* URLSessionMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		C0CBE05A27F6B9020047A3B7 /* Domain */ = {
@@ -582,9 +604,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0C148CB27FA968A0047E997 /* NetworkManagerTests.swift in Sources */,
 				CD91212227F92A420094EE00 /* ImageUseCaseMock.swift in Sources */,
 				CD91210E27F86C950094EE00 /* NetworkManagerMock.swift in Sources */,
 				CD91211A27F87B0C0094EE00 /* SampleData.swift in Sources */,
+				C0C148C927FA911A0047E997 /* URLSessionMock.swift in Sources */,
 				CD91212427F999B70094EE00 /* SearchViewPresenterMock.swift in Sources */,
 				CD91211627F877360094EE00 /* ImageRepositoryMock.swift in Sources */,
 				CD91211F27F929C30094EE00 /* SearchReactorTests.swift in Sources */,

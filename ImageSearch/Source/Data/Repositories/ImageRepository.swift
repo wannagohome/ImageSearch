@@ -24,12 +24,7 @@ final class ImageRepository: ImageRepositoryType {
     
     // MARK: - Internal Methods
     func search(_ parameter: ImageSearchRequest) -> Single<ImageSearchResponse> {
-        var components = URLComponents(string: "https://dapi.kakao.com/v2/search/image")!
-        components.queryItems = parameter.toQueryItem()
-        var request = URLRequest(url: components.url!)
-        request.allHTTPHeaderFields = ["Authorization" : "KakaoAK \(Environment.apiKey)"]
-        
-        return networkManager.request(request)
+        networkManager.request(SearchAPI.getAPI(parameter).request)
             .flatMap { data -> Single<ImageSearchResponse> in
                 return .just(try Decoder().decode(ImageSearchResponse.self, from: data))
             }

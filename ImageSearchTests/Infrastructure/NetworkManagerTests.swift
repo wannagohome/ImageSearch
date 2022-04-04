@@ -28,7 +28,7 @@ class NetworkManagerTests: XCTestCase {
         
         //when
         networkManager
-            .request(URLRequest(url: URL(string: "https://dapi.kakao.com/v2/search/image")!))
+            .request(SearchAPI.getAPI(.init(query: "")).request)
             .asObservable()
             .bind(to: response)
             .dispose()
@@ -43,7 +43,7 @@ class NetworkManagerTests: XCTestCase {
         
         //given
         let result = networkManager
-            .request(URLRequest(url: URL(string: "https://dapi.kakao.com/v2/search/image")!))
+            .request(SearchAPI.getAPI(.init(query: "")).request)
             .toBlocking()
             .materialize()
         

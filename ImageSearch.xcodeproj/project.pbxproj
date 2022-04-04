@@ -16,6 +16,8 @@
 		C00172A127F56D7700DBEA47 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C00172A027F56D7700DBEA47 /* Kingfisher */; };
 		C0C148C927FA911A0047E997 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C148C827FA911A0047E997 /* URLSessionMock.swift */; };
 		C0C148CB27FA968A0047E997 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C148CA27FA968A0047E997 /* NetworkManagerTests.swift */; };
+		C0C148CD27FAA0A60047E997 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C148CC27FAA0A60047E997 /* API.swift */; };
+		C0C148D027FAB0C30047E997 /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C148CF27FAB0C30047E997 /* SearchAPI.swift */; };
 		C0CBE05727F6B2290047A3B7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0CBE05627F6B2290047A3B7 /* SnapKit */; };
 		C0CBE05927F6B5720047A3B7 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE05827F6B5720047A3B7 /* SearchReactor.swift */; };
 		C0CBE05D27F6B93A0047A3B7 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CBE05C27F6B93A0047A3B7 /* ImageModel.swift */; };
@@ -71,6 +73,8 @@
 		C001727F27F568DF00DBEA47 /* ImageSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C148C827FA911A0047E997 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		C0C148CA27FA968A0047E997 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		C0C148CC27FAA0A60047E997 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		C0C148CF27FAB0C30047E997 /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		C0CBE05827F6B5720047A3B7 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		C0CBE05C27F6B93A0047A3B7 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		C0CBE06227F6C6BB0047A3B7 /* ImageDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDocument.swift; sourceTree = "<group>"; };
@@ -233,6 +237,15 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		C0C148CE27FAB0B00047E997 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				C0C148CC27FAA0A60047E997 /* API.swift */,
+				C0C148CF27FAB0C30047E997 /* SearchAPI.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
 		C0CBE05A27F6B9020047A3B7 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +352,7 @@
 		CD9120F127F5D5190094EE00 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				C0C148CE27FAB0B00047E997 /* APIs */,
 				CD9120F227F5D54A0094EE00 /* NetworkManager.swift */,
 				CD9120FB27F5DBDB0094EE00 /* NetworkError.swift */,
 			);
@@ -576,6 +590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0C148CD27FAA0A60047E997 /* API.swift in Sources */,
 				CD9120FF27F721BC0094EE00 /* Decoder.swift in Sources */,
 				C0CBE06327F6C6BB0047A3B7 /* ImageDocument.swift in Sources */,
 				CD91210327F7286B0094EE00 /* UICollectionView + Rx.swift in Sources */,
@@ -590,6 +605,7 @@
 				C001726F27F568DC00DBEA47 /* SceneDelegate.swift in Sources */,
 				C0CBE06A27F6CEA40047A3B7 /* ImageRepository.swift in Sources */,
 				C0CBE07327F6DD5E0047A3B7 /* Environment.swift in Sources */,
+				C0C148D027FAB0C30047E997 /* SearchAPI.swift in Sources */,
 				C0CBE06527F6C7C20047A3B7 /* SearchMetaData.swift in Sources */,
 				C0CBE06D27F6D5890047A3B7 /* ImageUseCase.swift in Sources */,
 				C0CBE07527F6E1490047A3B7 /* ImageSearchRequest.swift in Sources */,
